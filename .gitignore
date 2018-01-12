@@ -1,0 +1,2 @@
+modulo1/cache/*
+!modulo1/cache/.htaccess
