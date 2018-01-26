@@ -9,9 +9,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-ALTER SCHEMA `biblioteca`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
-
-CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`usuario` (
+CREATE TABLE IF NOT EXISTS `usuario` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `email` VARCHAR(85) NOT NULL,
@@ -20,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`usuario` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`emprestimo` (
+CREATE TABLE IF NOT EXISTS `emprestimo` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `cd_livro` INT(11) NOT NULL,
   `cd_usuario` INT(11) NOT NULL,
@@ -31,18 +29,18 @@ CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`emprestimo` (
   INDEX `fk_emprestimo_usuario1_idx` (`cd_usuario` ASC),
   CONSTRAINT `fk_emprestimo_livro1`
     FOREIGN KEY (`cd_livro`)
-    REFERENCES `phalcon_biblioteca`.`livro` (`id`)
+    REFERENCES `livro` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_emprestimo_usuario1`
     FOREIGN KEY (`cd_usuario`)
-    REFERENCES `phalcon_biblioteca`.`usuario` (`id`)
+    REFERENCES `usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`livro` (
+CREATE TABLE IF NOT EXISTS `livro` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `cd_autor` INT(11) NOT NULL,
   `cd_genero` INT(11) NOT NULL,
@@ -54,25 +52,25 @@ CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`livro` (
   INDEX `fk_livro_genero1_idx` (`cd_genero` ASC),
   CONSTRAINT `fk_livro_autor`
     FOREIGN KEY (`cd_autor`)
-    REFERENCES `phalcon_biblioteca`.`autor` (`id`)
+    REFERENCES `autor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_livro_genero1`
     FOREIGN KEY (`cd_genero`)
-    REFERENCES `phalcon_biblioteca`.`genero` (`id`)
+    REFERENCES `genero` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`autor` (
+CREATE TABLE IF NOT EXISTS `autor` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(85) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `phalcon_biblioteca`.`genero` (
+CREATE TABLE IF NOT EXISTS `genero` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(85) NOT NULL,
   PRIMARY KEY (`id`))
