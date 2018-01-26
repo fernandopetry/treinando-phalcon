@@ -12,7 +12,7 @@ return new \Phalcon\Config([
         'host'        => 'localhost',
         'username'    => 'root',
         'password'    => '123',
-        'dbname'      => 'test',
+        'dbname'      => 'biblioteca',
         'charset'     => 'utf8',
     ],
     'application' => [
