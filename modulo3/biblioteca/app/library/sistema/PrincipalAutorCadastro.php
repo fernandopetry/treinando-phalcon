@@ -2,12 +2,13 @@
 
 class PrincipalAutorCadastro extends \Phalcon\Mvc\User\Component implements PrincipalInterface
 {
+
     private $resultado;
     private $nome;
 
     private function cadastro()
     {
-        $autor       = new Autor();
+        $autor = new Autor();
         $autor->nome = $this->nome;
 
         if ($autor->save()) {
@@ -20,6 +21,9 @@ class PrincipalAutorCadastro extends \Phalcon\Mvc\User\Component implements Prin
     private function validarEntrada()
     {
         $this->nome = $this->request->getPost('nome', 'string');
+        if (!$this->nome) {
+            $this->nome = $this->request->getQuery('nome', 'string');
+        }
 
         if (empty($this->nome)) {
             throw new Exception("O nome não pode estar em branco.", E_USER_ERROR);
